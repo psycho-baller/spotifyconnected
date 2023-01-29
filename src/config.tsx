@@ -1,9 +1,9 @@
 import Head from 'next/head'
 
-const titleDefault = 'React Three Next Starter'
-const url = 'https://react-three-next.vercel.app/'
-const description = 'The easiest and fastest way to create a 3D website using React Three Fiber and NextJS'
-const author = 'Author'
+const titleDefault = 'Spotify Connected'
+const url = 'https://spotify-connected.vercel.app/'
+const description = 'Create your own Spotify playlist using your songs of the week and connect these songs to your friends'
+const author = 'Rami Maalouf (psycho-baller)'
 
 export default function Header({ title = titleDefault }) {
   return (
@@ -50,12 +50,6 @@ export default function Header({ title = titleDefault }) {
       <meta name='theme-color' content='#000' />
       <link rel='shortcut icon' href='/icons/favicon.ico' />
 
-      {/* 
-      Twitter Summary card
-        documentation: https://dev.twitter.com/cards/getting-started
-        Be sure validate your Twitter card markup on the documentation site. */}
-      <meta name='twitter:card' content='summary' />
-      <meta name='twitter:site' content='@onirenaud' />
     </Head>
   )
 }

@@ -1,7 +1,16 @@
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, Preload } from '@react-three/drei'
+import { MutableRefObject } from 'react'
 
-export default function Scene({ children, ...props }) {
+interface SceneProps {
+  children: React.ReactNode
+  orbit?: boolean
+  className?: string
+  eventSource?: MutableRefObject<undefined>
+  anyOtherProps?: any
+}
+
+export default function Scene({ children, orbit=true, ...props }: SceneProps) {
   // Everything defined in here will persist between route changes, only children are swapped
   return (
     <Canvas {...props}>
@@ -9,7 +18,7 @@ export default function Scene({ children, ...props }) {
       <ambientLight intensity={0.75} />
       {children}
       <Preload all />
-      <OrbitControls />
+      {orbit && <OrbitControls />}
     </Canvas>
   )
 }
