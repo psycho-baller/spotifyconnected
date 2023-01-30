@@ -1,5 +1,7 @@
 import dynamic from 'next/dynamic'
 import Instructions from '@/components/dom/Instructions'
+import { useMachine } from '@xstate/react'
+import { authenticationMachine } from '@/machines/auth'
 
 // Dynamic import is used to prevent a payload when the website starts, that includes threejs, r3f etc..
 // WARNING ! errors might get obfuscated by using dynamic import.
@@ -9,6 +11,11 @@ const Logo = dynamic(() => import('@/components/canvas/Logo'), { ssr: false })
 
 // Dom components go here
 export default function Page(props) {
+  const [state, send] = useMachine(authenticationMachine, 
+    { services: {
+      authenticate: () => fetch('/api/authenticate').then(res => res.json())
+    }
+  })
   return (
     <Instructions >
       This is a minimal starter for Nextjs + React-three-fiber and Threejs. Click on the{' '}
