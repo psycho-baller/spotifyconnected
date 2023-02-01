@@ -17,9 +17,6 @@ export const authenticationMachine =
 createMachine<Context, Event >({
     id: 'authentication',
     initial: 'login',
-    schema: {
-        events: {} as Event,
-    },
     // tsTypes: {} as import("./auth.typegen").Typegen0,
     context: {
       username: '',

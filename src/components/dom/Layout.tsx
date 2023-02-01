@@ -1,4 +1,5 @@
 import { useRef, forwardRef, useImperativeHandle } from 'react'
+import Navbar from './navbar/Navbar'
 
 const Layout = forwardRef(({ children, ...props }: { children: React.ReactNode}
   , ref) => {
@@ -11,6 +12,7 @@ const Layout = forwardRef(({ children, ...props }: { children: React.ReactNode}
       {...props}
       ref={localRef}
       className='absolute top-0 left-0 z-10 w-screen h-screen overflow-hidden dom bg-zinc-900 text-gray-50'>
+      <Navbar />
       {children}
     </div>
   )

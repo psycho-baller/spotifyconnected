@@ -5,5 +5,10 @@
     "source.fixAll": true
   },
   "eslint.validate": ["javascript"],
-  "eslint.workingDirectories": [{ "mode": "auto" }]
+  "eslint.workingDirectories": [
+    {
+      "mode": "auto"
+    }
+  ],
+  "WhiteSource Advise.Diff.BaseBranch": "main"
 }
