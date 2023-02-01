@@ -1,3 +1,5 @@
 # spotify-connected
 
-This project was bootstrapped with [`create-r3f-app`](https://github.com/utsuboco/create-r3f-app)
+## TODO
+
+- [ ] I could instead make the bg transparent and render the canvas behind the dom elements
