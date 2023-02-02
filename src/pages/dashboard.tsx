@@ -12,22 +12,20 @@ export default function Page(props) {
     const loading = status === "loading"
 
     const [tracks, setTracks] = useState([])
+
+      useEffect(() => {
+    if ((!session && !loading)) {
+      router.push('/')
+    }
+  }, [session, loading, router])
 useEffect(() => {
-    //     if (!session && !loading ) {
-    //     console.log(session);
-        
-    //     router.push('/')
-    //     return
-    // } else {
+    
     const fetchData = async () => {
     const data = (await getRecentTracks())
     console.log(data);
-    
-    if(data.error ) {
-        router.push('/')
-        return
+if (!data || !data.items) {
+      router.push('/')
     }
-    
     
     setTracks(data.items.map((item) => ({
         // parse the tracks into a list of objects
