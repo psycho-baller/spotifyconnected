@@ -1,12 +1,15 @@
 import { BsSpotify } from 'react-icons/bs';
 import { signIn, signOut, useSession } from "next-auth/react"
-import { useState, useRef } from 'react';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 export default function Page(props) {
   const { data: session, status } = useSession()
   const loading = status === "loading"
 
+  const router = useRouter();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
 
   if (loading) return <div>Loading...</div>
 
@@ -36,7 +39,7 @@ export default function Page(props) {
             <div className="py-1">
               <a
                 href="#"
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300"
               >
                 Profile
               </a>
@@ -47,8 +50,17 @@ export default function Page(props) {
                 Settings
               </a>
               <a
+                onClick={() => router.push("/dashboard")}
                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                onClick={() => signOut()}
+              >
+                Dashboard
+              </a>
+              <a
+                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                onClick={(e) => {
+                  e.preventDefault();
+                  signOut()}
+                }
               >
                 Sign Out
               </a>
@@ -60,7 +72,9 @@ export default function Page(props) {
 
             ) : (
             <button
-                onClick={() => signIn("spotify")}
+                onClick={(e) => {
+                  e.preventDefault()
+                  signIn("spotify")}}
                 className="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
             >
                 Login with Spotify
