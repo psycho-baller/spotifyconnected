@@ -16,11 +16,11 @@ const Layout = forwardRef(({ children, ...props }: { children: React.ReactNode }
     <div
       {...props}
       ref={localRef}
-      className='absolute top-0 left-0 z-10 w-screen h-screen overflow-x-hidden dom bg-zinc-900 text-gray-50'>
+      className='absolute top-0 left-0 z-10 w-screen h-screen overflow-x-hidden dom bg-[#151D3B] text-gray-50'>
       {!isInVisualization && <Navbar />}
-      <div className="relative">
-        {children}
-      </div>
+      {/* <div className="relative"> */}
+      {children}
+      {/* </div> */}
     </div>
   )
 })

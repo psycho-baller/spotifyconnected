@@ -14,7 +14,9 @@ export default function Page(props) {
   if (loading) return <div>Loading...</div>
 
   return (
-    <nav className="flex items-center justify-between p-4 bg-gray-800 px-12 ">
+    // linear gadient transparent to black from bottom to top navbar
+
+    <nav className="flex items-center justify-between p-4 bg-gray-800 px-12 bg-transparent translucent">
       <div className="flex items-center">
         <BsSpotify className="w-10 h-10 text-white" />
         <h1 className="text-white font-bold ml-2">My App</h1>
