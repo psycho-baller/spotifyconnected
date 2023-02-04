@@ -4,7 +4,6 @@ import { SessionProvider } from "next-auth/react"
 import Header from '@/config'
 import Layout from '@/components/dom/Layout'
 import '@/styles/index.scss'
-import Navbar from '@/components/dom/navbar/Navbar'
 
 const Scene = dynamic(() => import('@/components/canvas/Scene'), { ssr: true })
 
@@ -13,22 +12,22 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
   return (
     <>
       <Header title={pageProps.title} />
-        <SessionProvider session={session}>
-      <Layout ref={ref}>
-      {/* <Navbar /> */}
+      <SessionProvider session={session}>
+        <Layout ref={ref}>
+          {/* <Navbar /> */}
 
-        <Component {...pageProps} />
-        {/* The canvas can either be in front of the dom or behind. If it is in front it can overlay contents.
+          <Component {...pageProps} />
+          {/* The canvas can either be in front of the dom or behind. If it is in front it can overlay contents.
          * Setting the event source to a shared parent allows both the dom and the canvas to receive events.
         * Since the event source is now shared, the canvas would block events, we prevent that with pointerEvents: none. */}
-        {Component?.canvas && (
-          // @ts-ignore
-          <Scene className='pointer-events-none' eventSource={ref} eventPrefix='client'>
-            {Component.canvas(pageProps)}
-          </Scene>
-        )}
-      </Layout>
-        </SessionProvider>
+          {Component?.canvas && (
+            // @ts-ignore
+            <Scene className='pointer-events-none' eventSource={ref} eventPrefix='client'>
+              {Component.canvas(pageProps)}
+            </Scene>
+          )}
+        </Layout>
+      </SessionProvider>
     </>
   )
 }

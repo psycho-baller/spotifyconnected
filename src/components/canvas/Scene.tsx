@@ -12,12 +12,12 @@ interface SceneProps {
 }
 
 
-export default function Scene({ children, orbit=true, screen=true, ...props }: SceneProps) {
+export default function Scene({ children, orbit = true, screen = true, ...props }: SceneProps) {
   // Everything defined in here will persist between route changes, only children are swapped
   return (
     <Canvas {...props}
-    {...screen && {className:"!absolute top-0 left-0 -z-50 !w-screen !h-screen overflow-hidden"}}
-    
+      {...screen && { className: "!absolute top-0 left-0 -z-50 !w-screen !h-screen overflow-hidden" }}
+    // className="!w-screen !h-screen overflow-hidden"
     >
       <directionalLight intensity={0.75} />
       <ambientLight intensity={0.75} />

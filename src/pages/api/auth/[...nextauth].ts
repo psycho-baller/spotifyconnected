@@ -50,6 +50,8 @@ async function refreshAccessToken(token) {
 export const authOptions = {
   // Configure one or more authentication providers
   providers: [
+    // https://github.com/nextauthjs/next-auth/blob/main/packages/next-auth/src/core/types.ts#L324
+    // https://github.com/nextauthjs/next-auth/discussions/1053#discussioncomment-265810
     SpotifyProvider({
       authorization:
         'https://accounts.spotify.com/authorize?scope=playlist-read-private playlist-read-collaborative ugc-image-upload playlist-modify-private user-read-email user-read-private user-modify-playback-state user-follow-modify user-library-read user-library-modify playlist-modify-public user-read-currently-playing user-read-recently-played user-read-playback-position user-top-read',
