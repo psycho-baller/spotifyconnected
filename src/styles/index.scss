@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+// Color palette: https: //colorhunt.co/palette/cff5e7a0e4cb59c1bd0d4c92
+
 :root {
   --spacing: 2vw;
 }
@@ -20,6 +22,12 @@
     padding: 0;
     overflow: hidden;
   }
+}
+
+// all text
+p, h1, h2, h3, h4, h5, h6 {
+  font-family: 'Roboto', sans-serif;
+    color: #CFF5E7;
 }
 
 
@@ -95,7 +103,7 @@
 }
 /* translucent with linear gradient */
 .translucent {
-  background: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+  background: linear-gradient(rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 100%);
 
 }
 

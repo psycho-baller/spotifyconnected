@@ -22,7 +22,7 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
         * Since the event source is now shared, the canvas would block events, we prevent that with pointerEvents: none. */}
           {Component?.canvas && (
             // @ts-ignore
-            <Scene className='pointer-events-none' eventSource={ref} eventPrefix='client'>
+            <Scene screen="true" className='pointer-events-none' eventSource={ref} eventPrefix='client'>
               {Component.canvas(pageProps)}
             </Scene>
           )}
