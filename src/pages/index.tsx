@@ -34,31 +34,16 @@ export default function Page(props) {
   </div>
   )
 
-  if (session) {
-
-    return (
-      // <Scroll>
-      <main className='xl:mx-8 lg:mx-6 md:mx-4 mx-2' >
-        <Hero />
-        <Features />
-        <About />
-        <CTA />
-      </main>
-      // </Scroll> 
-    )
-  } else {
-    return (
-      <div>
-        <h1>Not signed in</h1>
-        <button onClick={() => signIn(
-          'spotify'
-        )
-
-        }>Sign in</button>
-      </div>
-    )
-  }
-
+  return (
+    // <Scroll>
+    <main className='xl:mx-8 lg:mx-6 md:mx-4 mx-2' >
+      <Hero />
+      <Features />
+      <About />
+      <CTA />
+    </main>
+    // </Scroll> 
+  )
 }
 
 // Canvas components go here
