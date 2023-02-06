@@ -35,14 +35,12 @@ export default function Page(props) {
   )
 
   return (
-    // <Scroll>
     <main className='xl:mx-8 lg:mx-6 md:mx-4 mx-2' >
       <Hero />
       <Features />
       <About />
       <CTA />
     </main>
-    // </Scroll> 
   )
 }
 
