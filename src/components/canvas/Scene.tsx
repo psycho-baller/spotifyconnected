@@ -16,14 +16,14 @@ export default function Scene({ children, orbit = false, screen = false, ...prop
   // Everything defined in here will persist between route changes, only children are swapped
   return (
     <Canvas {...props}
-      {...screen && { className: "!absolute top-0 left-0 -z-50 !w-screen !h-screen overflow-hidden" }}
+      {...screen && { className: "top-0 left-0 -z-50 !w-screen !h-screen overflow-hidden !fixed" }}
     // className="!w-screen !h-screen overflow-hidden"
     >
+      {orbit && <OrbitControls />}
       <directionalLight intensity={0.75} />
       <ambientLight intensity={0.75} />
       {children}
       <Preload all />
-      {orbit && <OrbitControls />}
     </Canvas>
   )
 }

@@ -1,7 +1,13 @@
 import { BsSpotify } from 'react-icons/bs';
 import { signIn, signOut, useSession } from "next-auth/react"
-import { useState } from 'react';
+import { Suspense, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
+import Scene from '@/components/canvas/Scene';
+import { Mesh } from "three";
+import dynamic from 'next/dynamic';
+
+
+const Crystal = dynamic(() => import('@/components/canvas/models/Crystal'), { ssr: false })
 
 export default function Page(props) {
   const { data: session, status } = useSession()
@@ -9,16 +15,18 @@ export default function Page(props) {
 
   const router = useRouter();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
+  const crystalRef = useRef<Mesh>(null);
 
   if (loading) return <div>Loading...</div>
-
   return (
-    // linear gadient transparent to black from bottom to top navbar
-
-    <nav className="flex items-center justify-between p-4 bg-gray-800 px-12 bg-transparent translucent">
+    // linear gradient transparent to black from bottom to top navbar
+    <nav className="flex items-center justify-between p-4 px-12 bg-transparent translucent">
       <div className="flex items-center">
-        <BsSpotify className="w-10 h-10 text-white" />
+        <Scene className='!w-5 !h-8' >
+          <Suspense fallback={null}>
+            <Crystal ref={crystalRef} refProp={crystalRef} rotate={1} scale={3} position-y={-2} />
+          </Suspense>
+        </Scene>
         <h1 className="text-white font-bold ml-2">My App</h1>
       </div>
       {session ? (

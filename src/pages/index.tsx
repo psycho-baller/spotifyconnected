@@ -6,17 +6,20 @@ import Hero from '@/components/dom/Hero';
 import About from '@/components/dom/About';
 import Features from '@/components/dom/Features';
 import CTA from '@/components/dom/CTA';
+// import HomeBG from '@/components/canvas/HomeBG';
+
 // Dynamic import is used to prevent a payload when the website starts, that includes threejs, r3f etc..
 // WARNING ! errors might get obfuscated by using dynamic import.
 // If something goes wrong go back to a static import to show the error.
 // https://github.com/pmndrs/react-three-next/issues/49
-const Logo = dynamic(() => import('@/components/canvas/Logo'), { ssr: false })
-const Crystal = dynamic(() => import('@/components/canvas/models/Crystal'), { ssr: false })
+const HomeBG = dynamic(() => import('@/components/canvas/HomeBG'), { ssr: false })
 
 
 export default function Page(props) {
   const { data: session, status } = useSession()
   const loading = (status === 'loading') as boolean
+
+
 
   // const [state, send] = useMachine(authenticationMachine,
   //   {
@@ -57,14 +60,17 @@ export default function Page(props) {
 
 // Canvas components go here
 // It will receive same props as the Page component (from getStaticProps, etc.)
-
 Page.canvas = (props) => {
-  return (
-    <>
-      {/* <Logo scale={0.5} route='/dashboard' position-y={1} /> */}
+  // let scrollY = 0
+  // if (typeof window !== 'undefined') {
+  //   let scrollY = window.scrollY
+  //   console.log(scrollY);
+  // }
 
-      <Crystal texture="med" position={[0, 0, 0]} />
-    </>
+
+
+  return (
+    <HomeBG />
   )
 }
 
