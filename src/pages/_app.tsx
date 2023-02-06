@@ -14,17 +14,18 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
     <>
       <Header title={pageProps.title} />
       <SessionProvider session={session}>
-        <Scroll>
-          <Layout ref={ref}>
-            {/* <Navbar /> */}
-            <Component {...pageProps} />      {Component?.canvas && (
-              // @ts-ignore
-              <Scene screen="true" className='pointer-events-none' eventSource={ref} eventPrefix='client'>
-                {Component.canvas(pageProps)}
-              </Scene>
-            )}
-          </Layout>
-        </Scroll>
+        <Layout ref={ref}>
+          {/* <Navbar /> */}
+          <Component {...pageProps} />
+          {Component?.canvas && (
+            // <Scroll>
+            // @ts-ignore
+            <Scene screen="true" className='pointer-events-none' eventSource={ref} eventPrefix='client'>
+              {Component.canvas(pageProps)}
+            </Scene>
+            // </Scroll>
+          )}
+        </Layout>
       </SessionProvider>
       {/* The canvas can either be in front of the dom or behind. If it is in front it can overlay contents.
          * Setting the event source to a shared parent allows both the dom and the canvas to receive events.

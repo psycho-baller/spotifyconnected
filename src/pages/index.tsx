@@ -6,7 +6,7 @@ import Hero from '@/components/dom/Hero';
 import About from '@/components/dom/About';
 import Features from '@/components/dom/Features';
 import CTA from '@/components/dom/CTA';
-import { ScrollTicker } from '@/utils/Scroll';
+import Scroll, { ScrollTicker } from '@/utils/Scroll';
 // import HomeBG from '@/components/canvas/HomeBG';
 
 // Dynamic import is used to prevent a payload when the website starts, that includes threejs, r3f etc..
@@ -37,12 +37,14 @@ export default function Page(props) {
   if (session) {
 
     return (
+      // <Scroll>
       <main className='xl:mx-8 lg:mx-6 md:mx-4 mx-2' >
         <Hero />
         <Features />
         <About />
         <CTA />
       </main>
+      // </Scroll> 
     )
   } else {
     return (
