@@ -6,7 +6,6 @@ import Scene from '@/components/canvas/Scene';
 import { Mesh } from "three";
 import dynamic from 'next/dynamic';
 
-
 const Crystal = dynamic(() => import('@/components/canvas/models/Crystal'), { ssr: false })
 
 export default function Page(props) {

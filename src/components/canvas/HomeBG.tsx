@@ -1,3 +1,4 @@
+import { ScrollTicker } from "@/utils/Scroll";
 import { useFrame } from "@react-three/fiber";
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
@@ -19,7 +20,8 @@ export default function HomeBG({ ...props }) {
 
     return (
         <>
-            <Crystal refProp={crystalRef} ref={crystalRef} texture="med" position={[0, 0, 0]} />
+            <ScrollTicker />
+            <Crystal refProp={crystalRef} ref={crystalRef} texture="med" position={[0, 2, 0]} />
         </>
     )
 }

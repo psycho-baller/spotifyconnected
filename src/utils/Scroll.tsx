@@ -7,14 +7,14 @@ import { addEffect, useFrame } from '@react-three/fiber'
 import Lenis from '@studio-freight/lenis'
 import { useEffect } from 'react'
 import { useRef } from 'react'
-import * as THREE from 'three'
+import { MathUtils } from 'three'
 
 const state = {
   top: 0,
   progress: 0,
 }
 
-const { damp } = THREE.MathUtils
+const { damp } = MathUtils
 
 export default function Scroll({ children }) {
   const content = useRef(null)
@@ -59,7 +59,7 @@ export default function Scroll({ children }) {
         ref={content}
         style={{
           position: 'relative',
-          minHeight: '200vh',
+          minHeight: '300vh',
         }}>
         {children}
       </div>
@@ -69,7 +69,7 @@ export default function Scroll({ children }) {
 
 export const ScrollTicker = ({ smooth = 9999999 }) => {
   useFrame(({ viewport, camera }, delta) => {
-    camera.position.y = damp(camera.position.y, -state.progress * viewport.height, smooth, delta)
+    camera.position.y = damp(camera.position.y, state.progress * viewport.height / 1.32, smooth, delta)
   })
 
   return null

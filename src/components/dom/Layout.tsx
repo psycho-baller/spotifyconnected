@@ -17,7 +17,7 @@ const Layout = forwardRef(({ children, showNav = true, showFooter = false, ...pr
     <div
       {...props}
       ref={localRef}
-      className='absolute top-0 left-0 z-10 w-screen h-screen overflow-x-hidden dom bg-[#0D4C92]'>
+      className='absolute top-0 left-0 z-10 dom bg-[#0D4C92]'>
       {(!isInVisualization && showNav) && <Navbar />}
       {/* <div className="relative"> */}
       {children}
