@@ -9,7 +9,7 @@ const Crystal = dynamic(() => import('@/components/canvas/models/Crystal'), { ss
 export default function HomeBG({ ...props }) {
     const crystalRef = useRef<Mesh>(null);
 
-    useFrame(({ clock, viewport }) => {
+    useFrame(() => {
         if (crystalRef.current) {
 
         }

@@ -14,7 +14,7 @@ export default function Page(props) {
             //     background: 'linear-gradient(180deg, rgba(111, 56, 197, 0.3) 0%, rgba(111, 56, 197, 0.3) 100%)',
             // }}
             >
-                <h1 className="text-5xl font-black capitalize py-4 appealing-text"
+                <h1 className="text-5xl font-black capitalize py-4 appealing-text font-HitNRun"
                 // TODO: make that shit thicker with a new font
 
                 >Journaling for the music lovers</h1>

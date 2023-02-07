@@ -19,7 +19,7 @@ export default function Page(props) {
   if (loading) return <div>Loading...</div>
   return (
     // linear gradient transparent to black from bottom to top navbar
-    <nav className="flex items-center justify-between p-4 px-12 bg-transparent translucent">
+    <nav className="flex items-center justify-between xl:px-14 lg:px-12 md:px-8 sm:px-6 p-4  bg-transparent translucent">
       <div className="flex items-center">
         <Scene className='!w-5 !h-8' >
           <Suspense fallback={null}>
