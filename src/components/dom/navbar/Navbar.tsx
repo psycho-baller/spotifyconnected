@@ -26,7 +26,7 @@ export default function Page(props) {
             <Crystal ref={crystalRef} refProp={crystalRef} rotate={1} scale={3} position-y={-2} />
           </Suspense>
         </Scene>
-        <h1 className="text-white font-bold ml-2">My App</h1>
+        <h1 className="font-bold ml-2">Music Journal</h1>
       </div>
       {session ? (
         <div className="relative">
@@ -35,7 +35,7 @@ export default function Page(props) {
             onMouseLeave={() => setIsDropdownOpen(false)}
           >
             <img src={session.user.image} className="w-8 h-8 rounded-full" />
-            <h1 className="text-white font-bold ml-2">{session.user.name}</h1>
+            <h1 className="font-bold ml-2">{session.user.name}</h1>
           </div>
 
           {isDropdownOpen && (
@@ -44,28 +44,33 @@ export default function Page(props) {
               onMouseEnter={() => setIsDropdownOpen(true)}
               onMouseLeave={() => setIsDropdownOpen(false)}
             >
-              <div className="bg-white rounded-md shadow">
+              <div className="rounded-md shadow">
                 <div className="py-1">
                   <a
                     href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300"
+                    // Smooth transitions between each hover state
+                    style={{ transition: "all .25s ease" }}
+                    className="block px-4 py-2 text-sm text-gray-700 bg-[#59C1BD] hover:bg-[#A0E4CB]"
                   >
                     Profile
                   </a>
                   <a
                     href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    style={{ transition: "all .25s ease" }}
+                    className="block px-4 py-2 text-sm text-gray-700 bg-[#59C1BD] hover:bg-[#A0E4CB]"
                   >
                     Settings
                   </a>
                   <a
                     onClick={() => router.push("/dashboard")}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    style={{ transition: "all .25s ease" }}
+                    className="block px-4 py-2 text-sm text-gray-700 bg-[#59C1BD] hover:bg-[#A0E4CB]"
                   >
                     Dashboard
                   </a>
                   <a
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    className="block px-4 py-2 text-sm text-gray-700 bg-[#59C1BD] hover:bg-[#A0E4CB]"
+                    style={{ transition: "all .25s ease" }}
                     onClick={(e) => {
                       e.preventDefault();
                       signOut()

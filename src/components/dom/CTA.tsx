@@ -1,14 +1,8 @@
-import { OrbitControls } from '@react-three/drei'
-import { Suspense } from 'react'
-import { } from 'three-stdlib'
-import Scene from '../canvas/Scene'
-import SpinningVisual from '../canvas/SpinningVisual'
-
 
 export default function Page(props) {
 
     return (
-        <section className="grid md:grid-cols-2 pb-20 gap-12 px-5 sm:px-0 min-h-screen">
+        <section className="grid md:grid-cols-2 pb-20 gap-12 sm:px-0 min-h-screen">
             {/* <div className="flex flex-col justify-center items-center"> */}
             <section className="col-span-1 p-4"
             // style={{
@@ -28,11 +22,6 @@ export default function Page(props) {
 
             </section>
             {/* </div> */}
-
-
-
-
-
         </section>
     )
 }

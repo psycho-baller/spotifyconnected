@@ -9,3 +9,4 @@ export default function Page({ refProp, ...props }) {
         <primitive ref={refProp} {...props} object={scene} />
     )
 }
+

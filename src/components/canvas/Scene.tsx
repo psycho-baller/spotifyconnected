@@ -20,8 +20,8 @@ export default function Scene({ children, orbit = false, screen = false, ...prop
     // className="!w-screen !h-screen overflow-hidden"
     >
       {orbit && <OrbitControls />}
-      <directionalLight intensity={0.75} />
-      <ambientLight intensity={0.75} />
+      <directionalLight intensity={0.25} position={[0, 0, 10]} />
+
       {children}
       <Preload all />
     </Canvas>

@@ -27,7 +27,8 @@
 // all text
 p, h1, h2, h3, h4, h5, h6 {
   font-family: 'Roboto', sans-serif;
-    color: #CFF5E7;
+    color: #bff6e2;
+    // color: #A0E4CB;
 }
 
 
@@ -125,3 +126,10 @@ p, h1, h2, h3, h4, h5, h6 {
   margin-right: auto;
 }
 
+.appealing-text {
+  // blue and purple
+    background: linear-gradient(90deg,#00eaff 55%, #4ff29f 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
