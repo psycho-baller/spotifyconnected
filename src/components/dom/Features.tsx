@@ -3,7 +3,8 @@
 export default function Page(props) {
 
     return (
-        <section className="grid md:grid-cols-2 pb-20 gap-12 sm:px-0 min-h-screen">
+        // TODO: smooth transition between page sections
+        <section className="grid md:grid-cols-2 pb-20 gap-12 sm:px-0 min-h-screen" id="features">
             {/* <div className="flex flex-col justify-center items-center"> */}
             <section className="col-span-1 p-4"
             // style={{
