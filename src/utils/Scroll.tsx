@@ -16,7 +16,7 @@ const state = {
 
 const { damp } = MathUtils
 
-export default function Scroll({ children }) {
+export default function Scroll({ children, ...props }) {
   const content = useRef(null)
   const wrapper = useRef(null)
 
@@ -47,10 +47,11 @@ export default function Scroll({ children }) {
 
   return (
     <div
+      {...props}
       ref={wrapper}
       style={{
         position: 'absolute',
-        overflow: 'hidden',
+        // overflow: 'hidden',
         width: '100%',
         height: '100%',
         top: 0,
@@ -69,7 +70,7 @@ export default function Scroll({ children }) {
 
 export const ScrollTicker = ({ smooth = 9999999 }) => {
   useFrame(({ viewport, camera }, delta) => {
-    camera.position.y = damp(camera.position.y, state.progress * viewport.height / 1.32, smooth, delta)
+    camera.position.y = damp(camera.position.y, (state.progress * viewport.height) / 1.32, smooth, delta)
   })
 
   return null
