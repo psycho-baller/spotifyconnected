@@ -51,7 +51,7 @@ export default function Scroll({ children, ...props }) {
       ref={wrapper}
       style={{
         position: 'absolute',
-        // overflow: 'hidden',
+        overflow: 'hidden',
         width: '100%',
         height: '100%',
         top: 0,

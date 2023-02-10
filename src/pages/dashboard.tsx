@@ -1,4 +1,4 @@
-import { useSession } from 'next-auth/react'
+import { getSession, useSession } from 'next-auth/react'
 import { getRecentTracks } from '@/utils/spotify'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
@@ -143,9 +143,10 @@ export default function Page(props: any) {
   )
 }
 
-export async function getStaticProps() {
-  return { props: { title: 'Dashboard' } }
-}
+// export async function getStaticProps() {
+//   const session = await getSession()
+//   return { props: { title: `${session.user.name}'s Dashboard` } }
+// }
 //     export const getStaticProps = async ({ req, res }) => {
 //   const session = await getSession({ req });
 
