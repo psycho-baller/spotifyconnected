@@ -13,6 +13,7 @@ const state = {
   top: 0,
   progress: 0,
 }
+export let lenis: Lenis
 
 const { damp } = MathUtils
 
@@ -21,7 +22,7 @@ export default function Scroll({ children, ...props }) {
   const wrapper = useRef(null)
 
   useEffect(() => {
-    const lenis = new Lenis({
+    lenis = new Lenis({
       wrapper: wrapper.current,
       content: content.current,
       duration: 1.2,
@@ -33,6 +34,8 @@ export default function Scroll({ children, ...props }) {
       touchMultiplier: 2,
       infinite: false,
     })
+    // localStorage.setItem('lenis', JSON.stringify(lenis))
+    console.log(lenis)
 
     lenis.on('scroll', ({ scroll, progress }) => {
       state.top = scroll
@@ -58,6 +61,7 @@ export default function Scroll({ children, ...props }) {
       }}>
       <div
         ref={content}
+        // lenis={lenis}
         style={{
           position: 'relative',
           // minHeight: '200vh',

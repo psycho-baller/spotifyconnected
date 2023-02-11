@@ -1,4 +1,6 @@
 import { OrbitControls } from '@react-three/drei'
+import Lenis from '@studio-freight/lenis'
+import { lenis } from '@/utils/Scroll'
 import { signIn, useSession } from 'next-auth/react'
 import router from 'next/router'
 import { Suspense } from 'react'
@@ -7,38 +9,48 @@ import SpinningVisual from '../canvas/SpinningVisual'
 
 export default function Page(props) {
   const { data: session, status } = useSession()
+  // const penis = new Lenis()
+  // const lenis = JSON.parse(localStorage.getItem('lenis'))
+  console.log(lenis)
 
   return (
-    <section className='grid md:grid-cols-2 pb-20 xl:gap-4 lg:gap-3 md:gap-2 min-h-screen'>
+    <section className='grid lg:grid-cols-6 xl:gap-4 lg:gap-3 md:gap-2 min-h-screen sm:mx-5 md:mx-10 lg:mx-0'>
       {/* <div className="flex flex-col justify-center items-center"> */}
       <section
-        className='col-span-1 p-4' // xl:pt-40 lg:pt-30
+        className='lg:col-span-4 p-4 my-auto xl:my-auto sm:mt-16 mt-20' //
       >
-        <h1 className=' lg:text-5xl md:text-4xl text-3xl capitalize xl:pt-12 py-4 hover:opacity-100 appealing-text font-HitNRun text-center md:text-left'>
+        <h1 className=' xl:text-5xl lg:text-4xl text-3xl capitalize xl:mb-8 mb-6 hover:opacity-100 appealing-text font-HitNRun text-center md:text-left'>
           Journaling for the music lovers
         </h1>
-        <p className='xl:text-2xl lg:text-xl sm:text-lg text-md mt-4'>
-          Wanna connect your favorite memories to a song? or a specific song reminds you of someone? You can create and
-          explore all these connections with <span className='capitalize'> music journal</span>
-        </p>
-        <p className='xl:text-2xl lg:text-xl sm:text-lg text-md mt-4'>
-          Choose your favorite song everyday and connect it to your most memorable memories and people
-        </p>
-        <p className='xl:text-2xl lg:text-xl sm:text-lg text-md mt-4'>
-          View your connections in cool interactive visuals that you can easily share with your friends
-        </p>
-        <p className='xl:text-2xl lg:text-xl sm:text-lg text-md mt-4'>
-          You can seamlessly connect <span className='capitalize'>music journal</span> to your favorite journaling apps
-          like{' '}
-          <a className='appealing-text' href='#features'>
-            Obsidian, Notion, and many more!
-          </a>
-          <div className='arrow bounce' />
-        </p>
+        <div className='space-y-3 xl:space-y-4'>
+          <p className='xl:text-2xl lg:text-xl sm:text-lg text-md '>
+            Wanna connect your favorite memories to a song? or a specific song reminds you of someone? You can create
+            and explore all these connections with <span className='capitalize'> music journal</span>
+          </p>
+          <p className='xl:text-2xl lg:text-xl sm:text-lg text-md '>
+            Choose your favorite song everyday and connect it to your most memorable memories and people
+          </p>
+          <p className='xl:text-2xl lg:text-xl sm:text-lg text-md '>
+            View your connections in cool interactive visuals that you can easily share with your friends
+          </p>
+          <p className='xl:text-2xl lg:text-xl sm:text-lg text-md '>
+            You can seamlessly connect <span className='capitalize'>music journal</span> to your favorite journaling
+            apps like{' '}
+            <a
+              className='appealing-text cursor-pointer'
+              href='#features'
+              onClick={() => {
+                lenis.scrollTo('#features')
+              }}>
+              Obsidian, Notion, and many more!
+            </a>
+            <div className='arrow bounce' />
+          </p>
+        </div>
         {/* CTA button */}
-        <div className='flex md:justify-start justify-center items-center lg:mt-2 md:mt-1 mb-2'>
+        <div className='flex md:justify-start justify-center items-center xl:mt-8 mt-6 mb-3'>
           <button
-            className='appealing-button font-bold py-2 px-4 rounded mt-4'
+            className='appealing-button font-bold py-2 px-4'
             onClick={() => {
               if (!session) {
                 signIn('spotify')
@@ -51,9 +63,14 @@ export default function Page(props) {
           </button>
         </div>
         <div className='font-extralight pl-3'>
-          <p>still confused?</p>
-          <a className='flex' href='#features'>
-            <p className='appealing-text'>
+          <p>scratching your head🤔?</p>
+          <a
+            className='flex'
+            href='#features'
+            onClick={() => {
+              lenis.scrollTo('#features')
+            }}>
+            <p className='appealing-text cursor-pointer'>
               Learn more about <span className='capitalize'> music journal&apos;s</span> features
             </p>
             <div className='arrow bounce' />
@@ -61,7 +78,7 @@ export default function Page(props) {
         </div>
       </section>
       <section
-        className='col-span-1 p-4'
+        className='lg:col-span-2 p-4'
         // style={{
         //     background: 'linear-gradient(180deg, rgba(111, 56, 197, 0.3) 0%, rgba(111, 56, 197, 0.3) 100%)',
         // }}

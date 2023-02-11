@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-// @import "compass/css3";
+
 @font-face {
   font-family: 'HitNRun';
   src: url('/fonts/Hit and Run.otf');
@@ -17,7 +17,7 @@
   font-display: swap;
   font-style: normal;
 }
-// Color palette: https: //colorhunt.co/palette/cff5e7a0e4cb59c1bd0d4c92
+// Color palette: https://colorhunt.co/palette/cff5e7a0e4cb59c1bd0d4c92
 
 :root {
   --spacing: 2vw;
@@ -36,11 +36,13 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
+    // background-color: #3e8585;
   }
 }
 
 // all text
 p,
+li,
 h1,
 h2,
 h3,
@@ -126,6 +128,10 @@ h6 {
   background: linear-gradient(rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 100%);
 }
 
+.translucent-box {
+  background: linear-gradient(rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.1) 100%);
+}
+
 .footer {
   justify-content: center;
   align-items: center;
@@ -150,7 +156,7 @@ h6 {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  cursor: pointer;
+  // cursor: pointer;
   opacity: 1;
   transition: opacity 0.2s ease-in;
 

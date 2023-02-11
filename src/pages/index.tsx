@@ -1,12 +1,11 @@
 import dynamic from 'next/dynamic'
 // import { useMachine } from '@xstate/react'
 // import { authenticationMachine } from '@/machines/auth'
-import { useSession, signIn, signOut } from 'next-auth/react';
-import Hero from '@/components/dom/Hero';
-import About from '@/components/dom/About';
-import Features from '@/components/dom/Features';
-import CTA from '@/components/dom/CTA';
-import Scroll, { ScrollTicker } from '@/utils/Scroll';
+import { useSession } from 'next-auth/react'
+import Hero from '@/components/dom/Hero'
+import About from '@/components/dom/About'
+import Features from '@/components/dom/Features'
+import CTA from '@/components/dom/CTA'
 // import HomeBG from '@/components/canvas/HomeBG';
 
 // Dynamic import is used to prevent a payload when the website starts, that includes threejs, r3f etc..
@@ -15,12 +14,9 @@ import Scroll, { ScrollTicker } from '@/utils/Scroll';
 // https://github.com/pmndrs/react-three-next/issues/49
 const HomeBG = dynamic(() => import('@/components/canvas/HomeBG'), { ssr: false })
 
-
-export default function Page(props) {
+export default function Page(props: any) {
   const { data: session, status } = useSession()
   const loading = (status === 'loading') as boolean
-
-
 
   // const [state, send] = useMachine(authenticationMachine,
   //   {
@@ -29,17 +25,19 @@ export default function Page(props) {
   //       signOut: () => signOut()
   //     }
   //   })
-  if (loading) return (<div>
-    <h1>Loading...</h1>
-  </div>
-  )
+  if (loading)
+    return (
+      <div>
+        <h1>Loading...</h1>
+      </div>
+    )
 
   return (
-    <main className='xl:mx-8 lg:mx-6 md:mx-4 mx-2' >
+    <main className='xl:mx-12 lg:mx-6 md:mx-4 mx-2'>
       <Hero />
       <Features />
-      <About />
-      <CTA />
+      {/* <About /> */}
+      {/* <CTA /> */}
     </main>
   )
 }
@@ -53,15 +51,9 @@ Page.canvas = (props) => {
   //   console.log(scrollY);
   // }
 
-
-
-  return (
-
-    <HomeBG />
-
-  )
+  return <HomeBG />
 }
 
 export async function getStaticProps() {
-  return { props: { title: 'Index' } }
+  return { props: { title: 'Music Journal' } }
 }

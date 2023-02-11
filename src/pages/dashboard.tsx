@@ -143,10 +143,10 @@ export default function Page(props: any) {
   )
 }
 
-// export async function getStaticProps() {
-//   const session = await getSession()
-//   return { props: { title: `${session.user.name}'s Dashboard` } }
-// }
+export async function getStaticProps() {
+  const session = await getSession()
+  return { props: { title: `Dashboard` } }
+}
 //     export const getStaticProps = async ({ req, res }) => {
 //   const session = await getSession({ req });
 
