@@ -34,8 +34,6 @@ export default function Scroll({ children, ...props }) {
       touchMultiplier: 2,
       infinite: false,
     })
-    // localStorage.setItem('lenis', JSON.stringify(lenis))
-    console.log(lenis)
 
     lenis.on('scroll', ({ scroll, progress }) => {
       state.top = scroll
