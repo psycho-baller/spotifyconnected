@@ -50,7 +50,7 @@ export default function Page(props) {
         {/* CTA button */}
         <div className='flex md:justify-start justify-center items-center xl:mt-8 mt-6 mb-3'>
           <button
-            className='appealing-button font-bold py-2 px-4'
+            className='appealing-button font-bold py-3 px-8'
             onClick={() => {
               if (!session) {
                 signIn('spotify')
@@ -59,7 +59,7 @@ export default function Page(props) {
                 router.push('/dashboard')
               }
             }}>
-            {session ? 'Go to dashboard' : 'Sign in with Spotify'}
+            {session ? 'Go to journal' : 'Sign in with Spotify'}
           </button>
         </div>
         <div className='font-extralight pl-3'>
@@ -78,7 +78,7 @@ export default function Page(props) {
         </div>
       </section>
       <section
-        className='lg:col-span-2 p-4'
+        className='lg:col-span-2 p-4 pt-16'
         // style={{
         //     background: 'linear-gradient(180deg, rgba(111, 56, 197, 0.3) 0%, rgba(111, 56, 197, 0.3) 100%)',
         // }}

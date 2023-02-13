@@ -14,15 +14,23 @@ const Layout = forwardRef(
     ref,
   ) => {
     const localRef = useRef()
+    let increment = 1
 
     useImperativeHandle(ref, () => localRef.current)
     const router = useRouter()
     const isInVisualization = ((router.pathname as string) === ('/visualization' as string)) as boolean
+    const isInjournal = ((router.pathname as string) === ('/journal' as string)) as boolean
     const isInRoot = ((router.pathname as string) === ('/' as string)) as boolean
     const colors = ['#0D4C92', '#1A272E', '#3e8585']
     const [colorIndex, setColorIndex] = useState(0)
     const changeColor = () => {
-      setColorIndex((index) => (index + 1) % colors.length)
+      // if it is in journal, don't make black background
+      // if (isInjournal && colorIndex === 0) increment++
+      setColorIndex((index) => {
+        if (isInjournal && index === 0) increment = 2
+        return (index + increment) % colors.length
+      })
+      increment = 1
     }
     return (
       <div

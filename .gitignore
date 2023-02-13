@@ -41,3 +41,6 @@ report.*.json
 
 # .vscode Debugging
 .vscode/*-debug-profile
+.xatarc
+.vscode/diff/vulsResult.txt
+.vscode/diff/vulsCount.txt

@@ -57,3 +57,9 @@ Page.canvas = (props) => {
 export async function getStaticProps() {
   return { props: { title: 'Music Journal' } }
 }
+
+// export const getServersideProps = async (context) => {
+//   const
+//   const session = await getSession(context)
+//   return { props: { session } }
+// }

@@ -59,6 +59,12 @@ export default function Page(props) {
                     Settings
                   </a>
                   <a
+                    onClick={() => router.push('/journal')}
+                    style={{ transition: 'all .25s ease' }}
+                    className='block px-4 py-2 text-sm text-gray-700 bg-[#59C1BD] hover:bg-[#A0E4CB]'>
+                    Journal
+                  </a>
+                  <a
                     onClick={() => router.push('/dashboard')}
                     style={{ transition: 'all .25s ease' }}
                     className='block px-4 py-2 text-sm text-gray-700 bg-[#59C1BD] hover:bg-[#A0E4CB]'>
@@ -84,8 +90,8 @@ export default function Page(props) {
             e.preventDefault()
             signIn('spotify')
           }}
-          className='bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded'>
-          Login with Spotify
+          className='font-bold py-2 px-4 appealing-button text-xs'>
+          Sign in with Spotify
         </button>
       )}
     </nav>

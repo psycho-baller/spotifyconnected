@@ -43,6 +43,11 @@
 // all text
 p,
 li,
+label,
+input,
+textarea,
+button,
+a,
 h1,
 h2,
 h3,
@@ -130,6 +135,10 @@ h6 {
 
 .translucent-box {
   background: linear-gradient(rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.1) 100%);
+}
+
+.translucent-dashboard-box {
+  background: linear-gradient(rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.25) 100%);
 }
 
 .footer {
@@ -227,8 +236,8 @@ h6 {
 // }
 
 .appealing-button {
-  width: 220px;
-  height: 50px;
+  // width: 220px;
+  // height: 50px;
   border: none;
   outline: none;
   color: #fff;
@@ -311,7 +320,7 @@ h6 {
   // cursor: pointer;
   // position: relative;
   // z-index: 0;
-  border-radius: 10px;
+  // border-radius: 10px;
 
   &:focus {
     outline: none;
