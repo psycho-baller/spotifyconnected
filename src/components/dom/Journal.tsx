@@ -72,7 +72,7 @@ export default function Page({ tracks, setTracks }: any) {
               />
               {/* when the input is active, show the popup that shows the search results in a scrollable list*/}
               {/* dropdown */}
-              <div className='bg-white max-h-56 min-h-fit rounded-lg shadow-lg absolute overflow-auto z-100 border-2 border-gray-300 invisible focus:visible focus-within:visible active:visible hover:visible'>
+              <div className='bg-white max-h-56 min-h-fit rounded-lg shadow-lg relative border-2 border-gray-300 invisible focus:visible focus-within:visible active:visible hover:visible'>
                 <div className='flex flex-col items-center '>
                   <Scroll className='overflow-y-scroll'>
                     <ul>
@@ -114,7 +114,7 @@ export default function Page({ tracks, setTracks }: any) {
                 name='last-name'
                 id='last-name'
                 autoComplete='family-name'
-                className='search-input p-1 block w-full !rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm bg-gray-900'
+                className='search-input p-1 sm:p-1.5 block w-full !rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm bg-gray-900'
               />
             </div>
           </div>

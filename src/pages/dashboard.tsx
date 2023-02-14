@@ -67,14 +67,15 @@ export default function Page(props: any) {
   }, [])
 
   return (
-    <main className='pt-16 xl:mx-12 lg:mx-6 md:mx-4 mx-2'>
+    <main className='pt-16 xl:mx-12 lg:mx-6 md:mx-4 mx-2 appealing-text text-9xl'>
       {/* <Search tracks={tracks} /> */}
-      <Journal tracks={tracks} setTracks={setTracks} />
+      {/* <Journal tracks={tracks} setTracks={setTracks} /> */}
+      hi
     </main>
   )
 }
 
 export async function getStaticProps() {
-  const session = await getSession()
+  // const session = await getSession()
   return { props: { title: `Dashboard` } }
 }

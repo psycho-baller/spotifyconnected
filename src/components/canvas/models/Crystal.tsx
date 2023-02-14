@@ -22,7 +22,7 @@ export default function Page({ texture = 'med', rotate = 0, refProp = null, ...p
   })
 
   const GLTF = useGLTF(textures[texture])
-  console.log(GLTF)
+  // console.log(GLTF)
 
   // const copiedScene = useMemo(() => scene.clone(), [scene])
 

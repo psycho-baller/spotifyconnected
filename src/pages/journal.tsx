@@ -36,7 +36,7 @@ const Page: FC<Props> = ({ data }) => {
   useEffect(() => {
     const fetchData = async () => {
       const data = await getRecentTracks()
-      // console.log(data)
+      console.log(data)
       // if (!data || !data.items) {
       //   router.push('/')
       // }

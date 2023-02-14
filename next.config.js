@@ -13,7 +13,16 @@ const nextConfig = {
   //   styledComponents: true,
   // },
   experimental: {},
-  images: {},
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'i.scdn.co',
+        // port: '',
+        // pathname: '',
+      },
+    ],
+  },
   reactStrictMode: true, // Recommended for the `pages` directory, default in `app`.
   webpack(config, { isServer }) {
     // audio support

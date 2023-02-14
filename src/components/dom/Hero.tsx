@@ -1,5 +1,4 @@
 import { OrbitControls } from '@react-three/drei'
-import Lenis from '@studio-freight/lenis'
 import { lenis } from '@/utils/Scroll'
 import { signIn, useSession } from 'next-auth/react'
 import router from 'next/router'
