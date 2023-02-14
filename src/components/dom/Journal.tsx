@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import Scroll from '@/utils/Scroll'
 import { HiOutlineAtSymbol } from 'react-icons/hi'
 import { FaMusic } from 'react-icons/fa'
+import Image from 'next/image'
 
 export default function Page({ tracks, setTracks }: any) {
   const [searchTerm, setSearchTerm] = useState('')
@@ -20,7 +21,7 @@ export default function Page({ tracks, setTracks }: any) {
         <div>
           <div className='flex justify-between items-center'>
             <label htmlFor='comment' className='block text-sm font-medium capitalize'>
-              Today's Journal Entry
+              Today&apos;s Journal Entry
             </label>
             {/* <span className=''>New</span> */}
 
@@ -85,7 +86,13 @@ export default function Page({ tracks, setTracks }: any) {
                             newTracks[indx].selected = !newTracks[indx].selected
                             setTracks(newTracks)
                           }}>
-                          <img src={track.albumCover} className='w-16 h-16 rounded-full' />
+                          <Image
+                            width={64}
+                            height={64}
+                            alt='album cover'
+                            src={track.albumCover}
+                            className='rounded-full'
+                          />
                           <h2 className='text-lg font-bold ml-2'>{track.title}</h2>
                           <h3 className='text-sm text-gray-400 ml-2'>{track.artist}</h3>
                           {track.selected && <span className='text-green-500 ml-2'>Selected</span>}

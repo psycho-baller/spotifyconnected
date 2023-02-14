@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import Scene from '@/components/canvas/Scene'
 import { Mesh } from 'three'
 import dynamic from 'next/dynamic'
+import Image from 'next/image'
 
 const Crystal = dynamic(() => import('@/components/canvas/models/Crystal'), { ssr: false })
 
@@ -34,7 +35,7 @@ export default function Page(props) {
             className='flex items-center cursor-pointer pb-1 pl-1'
             onMouseEnter={() => setIsDropdownOpen(true)}
             onMouseLeave={() => setIsDropdownOpen(false)}>
-            <img src={session.user.image} className='w-8 h-8 rounded-full' />
+            <Image height={32} width={32} src={session.user.image} alt='profile picture' className='rounded-full' />
             <h1 className='font-bold ml-2'>{session.user.name}</h1>
           </div>
 

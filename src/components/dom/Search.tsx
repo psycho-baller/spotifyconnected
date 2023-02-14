@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import { Combobox } from '@headlessui/react'
+import Image from 'next/image'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -46,7 +47,13 @@ export default function Example({ tracks }) {
                 {({ active, selected }) => (
                   <>
                     <div className='flex items-center'>
-                      <img src={person.albumImage} alt='' className='h-6 w-6 flex-shrink-0 rounded-full' />
+                      <Image
+                        height={24}
+                        width={24}
+                        src={person.albumCover}
+                        alt='album cover'
+                        className='flex-shrink-0 rounded-full'
+                      />
                       <span className={classNames('ml-3 truncate', selected && 'font-semibold')}>{person.title}</span>
                     </div>
 

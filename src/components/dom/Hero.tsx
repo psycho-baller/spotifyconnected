@@ -9,9 +9,6 @@ import SpinningVisual from '../canvas/SpinningVisual'
 
 export default function Page(props) {
   const { data: session, status } = useSession()
-  // const penis = new Lenis()
-  // const lenis = JSON.parse(localStorage.getItem('lenis'))
-  console.log(lenis)
 
   return (
     <section className='grid lg:grid-cols-6 xl:gap-4 lg:gap-3 md:gap-2 min-h-screen sm:mx-5 md:mx-10 lg:mx-0'>

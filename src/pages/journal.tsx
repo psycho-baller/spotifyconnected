@@ -102,9 +102,8 @@ export const getServerSideProps = async (context) => {
     })
   }
 
-  var data = await xata.db.days.filter({ 'user.email': user.email }).getAll()
+  let data = await xata.db.days.filter({ 'user.email': user.email }).getAll()
   data = JSON.parse(JSON.stringify(data))
-  console.log(data)
 
   return { props: { data } }
 }
