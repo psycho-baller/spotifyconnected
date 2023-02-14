@@ -67,11 +67,11 @@ export default function Page({ tracks, setTracks }: any) {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 autoComplete='given-name'
-                className='search-input p-1 block w-full !rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm bg-gray-900'
+                className='search-input p-1 sm:p-1.5 block w-full !rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm bg-gray-900'
               />
               {/* when the input is active, show the popup that shows the search results in a scrollable list*/}
               {/* dropdown */}
-              <div className='bg-white w-96 rounded-lg shadow-lg absolute z-100 border-2 border-gray-300 invisible focus:visible focus-within:visible active:visible hover:visible'>
+              <div className='bg-white max-h-56 min-h-fit rounded-lg shadow-lg absolute overflow-auto z-100 border-2 border-gray-300 invisible focus:visible focus-within:visible active:visible hover:visible'>
                 <div className='flex flex-col items-center '>
                   <Scroll className='overflow-y-scroll'>
                     <ul>
@@ -85,7 +85,7 @@ export default function Page({ tracks, setTracks }: any) {
                             newTracks[indx].selected = !newTracks[indx].selected
                             setTracks(newTracks)
                           }}>
-                          <img src={track.albumImage} className='w-16 h-16 rounded-full' />
+                          <img src={track.albumCover} className='w-16 h-16 rounded-full' />
                           <h2 className='text-lg font-bold ml-2'>{track.title}</h2>
                           <h3 className='text-sm text-gray-400 ml-2'>{track.artist}</h3>
                           {track.selected && <span className='text-green-500 ml-2'>Selected</span>}
@@ -112,6 +112,9 @@ export default function Page({ tracks, setTracks }: any) {
             </div>
           </div>
         </div>
+        <button>
+          <span className='sr-only'>Save</span>
+        </button>
       </form>
     </section>
   )

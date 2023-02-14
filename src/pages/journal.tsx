@@ -1,18 +1,21 @@
 import { getSession, useSession } from 'next-auth/react'
 import { getRecentTracks } from '@/utils/spotify'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import Journal from '@/components/dom/Journal'
+import { XataClient } from '@/utils/xata'
+import PreviousJournals from '@/components/dom/PreviousJournals'
+import { xata } from '@/utils/xataClient'
 
 // https://dev.to/asimdahall/simple-search-form-in-react-using-hooks-42pg
-
-export default function Page(props: any) {
+type Props = Awaited<ReturnType<typeof getServerSideProps>>['props']
+const Page: FC<Props> = ({ data }) => {
   interface Track {
     id: string
     artist: string
     title: string
     album: string
-    albumImage: string
+    albumCover: string
     selected: boolean
   }
 
@@ -33,10 +36,10 @@ export default function Page(props: any) {
   useEffect(() => {
     const fetchData = async () => {
       const data = await getRecentTracks()
-      console.log(data)
-      if (!data || !data.items) {
-        router.push('/')
-      }
+      // console.log(data)
+      // if (!data || !data.items) {
+      //   router.push('/')
+      // }
 
       setTracks(
         data.items.map(
@@ -53,7 +56,7 @@ export default function Page(props: any) {
             artist: item.track.artists[0].name,
             title: item.track.name,
             album: item.track.album.name,
-            albumImage: item.track.album.images[0].url,
+            albumCover: item.track.album.images[0].url,
             selected: false,
           }),
         ),
@@ -70,11 +73,40 @@ export default function Page(props: any) {
     <main className='pt-16 xl:mx-12 lg:mx-6 md:mx-4 mx-2'>
       {/* <Search tracks={tracks} /> */}
       <Journal tracks={tracks} setTracks={setTracks} />
+      <PreviousJournals data={data} />
     </main>
   )
 }
 
-export async function getStaticProps() {
-  const session = await getSession()
-  return { props: { title: `Dashboard` } }
+// export async function getStaticProps() {
+//   const session = await getSession()
+//   return { props: { title: `Journal` } }
+// }
+
+export const getServerSideProps = async (context) => {
+  const session = await getSession(context)
+  const user = session?.user
+  if (!user) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    }
+  }
+  // make sure the user is in the database by adding them if they are not
+  if (!(await xata.db.users.filter('email', user.email))) {
+    await xata.db.users.create({
+      email: user.email,
+      username: user.name,
+    })
+  }
+
+  var data = await xata.db.days.filter({ 'user.email': user.email }).getAll()
+  data = JSON.parse(JSON.stringify(data))
+  console.log(data)
+
+  return { props: { data } }
 }
+
+export default Page

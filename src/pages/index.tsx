@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 // import { useMachine } from '@xstate/react'
 // import { authenticationMachine } from '@/machines/auth'
-import { useSession } from 'next-auth/react'
+import { getSession, useSession } from 'next-auth/react'
 import Hero from '@/components/dom/Hero'
 import About from '@/components/dom/About'
 import Features from '@/components/dom/Features'
@@ -57,9 +57,3 @@ Page.canvas = (props) => {
 export async function getStaticProps() {
   return { props: { title: 'Music Journal' } }
 }
-
-// export const getServersideProps = async (context) => {
-//   const
-//   const session = await getSession(context)
-//   return { props: { session } }
-// }

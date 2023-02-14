@@ -23,7 +23,7 @@ export default function Page(props) {
               First, you write your daily journal entry, only this time you reference a song
             </li>
             <li className='xl:text-2xl lg:text-xl sm:text-lg text-md space-y-2 xl:space-y-3'>
-              <p>There's multiple ways to write your journal entry:</p>
+              <p>There&apos;s multiple ways to write your journal entry:</p>
               <div className='space-y-1.5 sm:space-y-2 xl:space-y-3 pl-2'>
                 <p>if through the dashboard, you can search for your most played songs for the day and select one</p>
                 <p>
@@ -62,7 +62,7 @@ export default function Page(props) {
               Automatically generate playlists based on your songs of the day, week, month, year, etc...
             </li>
             <li className='xl:text-2xl lg:text-xl sm:text-lg text-md '>
-              And it's all free! No ads, no hidden fees, no nothing! Click on the crystal below to get started
+              And it&apos;s all free! No ads, no hidden fees, no nothing! Click on the crystal below to get started
             </li>
           </ol>
         </div>

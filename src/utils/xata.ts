@@ -24,9 +24,18 @@ const tables = [
         defaultValue: "2000-01-01T00:00:00Z",
       },
       { name: "user", type: "link", link: { table: "users" } },
-      { name: "song", type: "string" },
       { name: "log", type: "text" },
       { name: "people", type: "multiple" },
+      { name: "song", type: "link", link: { table: "songs" } },
+    ],
+  },
+  {
+    name: "songs",
+    columns: [
+      { name: "title", type: "string", notNull: true, defaultValue: "" },
+      { name: "artist", type: "string" },
+      { name: "album", type: "string" },
+      { name: "albumCover", type: "string" },
     ],
   },
 ] as const;
@@ -40,9 +49,13 @@ export type UsersRecord = Users & XataRecord;
 export type Days = InferredTypes["days"];
 export type DaysRecord = Days & XataRecord;
 
+export type Songs = InferredTypes["songs"];
+export type SongsRecord = Songs & XataRecord;
+
 export type DatabaseSchema = {
   users: UsersRecord;
   days: DaysRecord;
+  songs: SongsRecord;
 };
 
 const DatabaseClient = buildClient();
