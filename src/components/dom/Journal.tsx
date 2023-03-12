@@ -1,12 +1,20 @@
 import { useEffect, useState } from 'react'
-import Scroll from '@/utils/Scroll'
-import { HiOutlineAtSymbol } from 'react-icons/hi'
+import { HiOutlineAtSymbol, HiOutlineSave } from 'react-icons/hi'
 import { FaMusic } from 'react-icons/fa'
 import Image from 'next/image'
+import Search from './Search'
 
 export default function Page({ tracks, setTracks }: any) {
   const [searchTerm, setSearchTerm] = useState('')
   const [searchResults, setSearchResults] = useState([])
+
+  // add times played to tracks
+  useEffect(() => {
+    const newTracks = tracks.map((track) => {
+      return { ...track, timesPlayed: tracks.filter((t) => t.title === track.title).length }
+    })
+    setTracks(newTracks)
+  }, [])
 
   useEffect(() => {
     // for now we will just filter the tracks by the title, but we can add more filters later
@@ -23,7 +31,6 @@ export default function Page({ tracks, setTracks }: any) {
             <label htmlFor='comment' className='block text-sm font-medium capitalize'>
               Today&apos;s Journal Entry
             </label>
-            {/* <span className=''>New</span> */}
 
             <div className='space-x-0.5'>
               <button
@@ -59,7 +66,8 @@ export default function Page({ tracks, setTracks }: any) {
             <label htmlFor='first-name' className='block text-sm font-medium '>
               Song of the day
             </label>
-            <div className='mt-1'>
+            {/* <Search tracks={tracks} /> */}
+            <div className='mt-1 relative'>
               <input
                 type='text'
                 name='search-song'
@@ -72,37 +80,52 @@ export default function Page({ tracks, setTracks }: any) {
               />
               {/* when the input is active, show the popup that shows the search results in a scrollable list*/}
               {/* dropdown */}
-              <div className='bg-white max-h-56 min-h-fit rounded-lg shadow-lg relative border-2 border-gray-300 invisible focus:visible focus-within:visible active:visible hover:visible'>
-                <div className='flex flex-col items-center '>
-                  <Scroll className='overflow-y-scroll'>
-                    <ul>
-                      {searchResults.map((track, indx) => (
-                        <li
-                          key={indx}
-                          className='flex items-center mb-4 cursor-pointer hover:bg-gray-200 p-4'
-                          onClick={() => {
-                            // toggle the selected state of the track
-                            const newTracks = [...tracks]
-                            newTracks[indx].selected = !newTracks[indx].selected
-                            setTracks(newTracks)
-                          }}>
-                          <Image
-                            width={64}
-                            height={64}
-                            alt='album cover'
-                            src={track.albumCover}
-                            className='rounded-full'
-                          />
-                          <h2 className='text-lg font-bold ml-2'>{track.title}</h2>
-                          <h3 className='text-sm text-gray-400 ml-2'>{track.artist}</h3>
-                          {track.selected && <span className='text-green-500 ml-2'>Selected</span>}
-                        </li>
-                      ))}
-                    </ul>
-                  </Scroll>
+              {/* <div className='bg-white max-h-52 z-50 w-full mt-1 rounded-lg shadow-lg overflow-auto absolute border-2 border-gray-300 invisible focus:visible focus-within:visible active:visible hover:visible'> */}
+              {/* <div className=''> */}
+              {searchResults.length > 0 && (
+                <div className='overflow-auto mt-1 w-full absolute translucent-dropdown sm:max-h-56 max-h-56 z-50 shadow-lg border-2 border-gray-300 rounded-lg invisible focus:visible focus-within:visible active:visible hover:visible'>
+                  <div className='flex flex-col items-center relative w-full space-y-1'>
+                    {searchResults.map((track, indx) => (
+                      <li
+                        key={indx}
+                        className='grid grid-cols-12 place-content-between w-full items-center cursor-pointer translucent-dropdown-hover p-2'
+                        onClick={() => {
+                          // toggle the selected state of the track
+                          const newTracks = [...tracks]
+                          newTracks[indx].selected = !newTracks[indx].selected
+                          setTracks(newTracks)
+                        }}>
+                        <Image
+                          width={36}
+                          height={36}
+                          alt='album cover'
+                          src={track.albumCover}
+                          className='rounded-full col-span-2'
+                        />
+                        <h2 className='text-sm ml-2 col-span-5'>{track.title}</h2>
+                        <h3 className='text-sm text-gray-400 ml-2 col-span-3'>{track.artist}</h3>
+                        {/* times played */}
+                        {
+                          // if the track has been played more than 1 time, show the number of times it has been played
+                        }
+                        {track.timesPlayed > 1 ? (
+                          <span className='text-sm text-gray-400 ml-2 col-span-1'>x{track.timesPlayed}</span>
+                        ) : (
+                          ''
+                        )}
+                        {track.selected && <span className='text-green-500 ml-2 col-auto'>Y</span>}
+                      </li>
+                    ))}
+                  </div>
+                  {/* </div> */}
                 </div>
-              </div>
+              )}
+              {/* </div> */}
             </div>
+          </div>
+
+          <div className='sm:col-span-3'>
+            <Search tracks={tracks} />
           </div>
           <div className='sm:col-span-3'>
             <label htmlFor='last-name' className='block text-sm font-medium '>
@@ -121,6 +144,7 @@ export default function Page({ tracks, setTracks }: any) {
         </div>
         <button>
           <span className='sr-only'>Save</span>
+          <HiOutlineSave className='h-6 w-6' />
         </button>
       </form>
     </section>

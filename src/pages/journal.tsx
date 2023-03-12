@@ -6,6 +6,7 @@ import Journal from '@/components/dom/Journal'
 import { XataClient } from '@/utils/xata'
 import PreviousJournals from '@/components/dom/PreviousJournals'
 import { xata } from '@/utils/xataClient'
+import Search from '@/components/dom/Search'
 
 // https://dev.to/asimdahall/simple-search-form-in-react-using-hooks-42pg
 type Props = Awaited<ReturnType<typeof getServerSideProps>>['props']

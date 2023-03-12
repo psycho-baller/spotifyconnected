@@ -140,6 +140,12 @@ h6 {
 .translucent-dashboard-box {
   background: linear-gradient(rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.25) 100%);
 }
+.translucent-dropdown {
+  background: rgba(0, 0, 0, 0.7);
+}
+.translucent-dropdown-hover:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
 
 .footer {
   justify-content: center;
@@ -326,7 +332,7 @@ h6 {
     outline: none;
     + * {
       visibility: visible;
-      // transition: all .3s ease-out;
+      // transition: all 0.3s ease-out;
       // TODO: add animation, using keyframes or framer motion
     }
   }

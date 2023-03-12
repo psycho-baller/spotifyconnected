@@ -39,13 +39,24 @@ const Layout = forwardRef(
         className={`absolute w-screen h-screen overflow-x-hidden top-0 left-0 z-10 dom`}
         style={{ backgroundColor: !isInVisualization ? colors[colorIndex] : 'transparent' }}
         onClick={changeColor}>
-        <Scroll>
-          {!isInVisualization && showNav && <Navbar />}
-          {/* <div className="relative"> */}
-          <div>{children}</div>
-          {/* {(showFooter || isInRoot) && <Footer />} */}
-          {/* </div> */}
-        </Scroll>
+        {/* wrap with scroll only in the root file */}
+        {isInRoot ? (
+          <Scroll>
+            {!isInVisualization && showNav && <Navbar />}
+            {/* <div className="relative"> */}
+            <div>{children}</div>
+            {/* {(showFooter || isInRoot) && <Footer />} */}
+            {/* </div> */}
+          </Scroll>
+        ) : (
+          <>
+            {!isInVisualization && showNav && <Navbar />}
+            {/* <div className="relative"> */}
+            <div>{children}</div>
+            {/* {(showFooter || isInRoot) && <Footer />} */}
+            {/* </div> */}
+          </>
+        )}
       </div>
     )
   },
