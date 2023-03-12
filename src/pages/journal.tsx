@@ -1,32 +1,24 @@
 import { getSession, useSession } from 'next-auth/react'
 import { getRecentTracks } from '@/utils/spotify'
 import { useRouter } from 'next/router'
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useMemo, useState } from 'react'
 import Journal from '@/components/dom/Journal'
 import { XataClient } from '@/utils/xata'
 import PreviousJournals from '@/components/dom/PreviousJournals'
 import { xata } from '@/utils/xataClient'
 import Search from '@/components/dom/Search'
+import { Track } from '@/utils/types'
 
 // https://dev.to/asimdahall/simple-search-form-in-react-using-hooks-42pg
 type Props = Awaited<ReturnType<typeof getServerSideProps>>['props']
 const Page: FC<Props> = ({ data }) => {
-  interface Track {
-    id: string
-    artist: string
-    title: string
-    album: string
-    albumCover: string
-    selected: boolean
-  }
-
   // a place where only the logged in user will be able to access
   // if user is not logged in, redirect to login page
   const router = useRouter()
   const { data: session, status } = useSession()
   const loading = status === 'loading'
 
-  const [tracks, setTracks] = useState([]) as [Track[], (tracks: Track[]) => void]
+  const [tracks, setTracks] = useState([])
 
   useEffect(() => {
     if (!session && !loading) {
@@ -42,28 +34,33 @@ const Page: FC<Props> = ({ data }) => {
       //   router.push('/')
       // }
 
-      setTracks(
-        data.items.map(
-          (item: {
-            track: {
-              id: string
-              artists: { name: string }[]
-              name: string
-              album: { name: string; images: { url: string }[] }
-            }
-          }) => ({
-            // parse the tracks into a list of objects
-            id: item.track.id,
-            artist: item.track.artists[0].name,
-            title: item.track.name,
-            album: item.track.album.name,
-            albumCover: item.track.album.images[0].url,
-            selected: false,
-          }),
-        ),
+      let temp = data.items.map(
+        (item: {
+          track: {
+            id: string
+            artists: { name: string }[]
+            name: string
+            album: { name: string; images: { url: string }[] }
+          }
+        }) => ({
+          // parse the tracks into a list of objects
+          id: item.track.id,
+          artist: item.track.artists[0].name,
+          title: item.track.name,
+          album: item.track.album.name,
+          albumCover: item.track.album.images[0].url,
+          selected: false,
+          timesPlayed: data.items.filter((t: any) => t.track.id === item.track.id).length,
+        }),
       )
-    }
+      // remove duplicates
+      temp = temp
+        .filter((v, i, a) => a.findIndex((t) => t.id === v.id) === i)
+        // sort by times played but keep  order of the rest
+        .sort((a, b) => b.timesPlayed - a.timesPlayed)
 
+      setTracks(temp)
+    }
     fetchData()
     return () => {
       // cleanup

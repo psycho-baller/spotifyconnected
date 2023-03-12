@@ -3,24 +3,30 @@ import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import { Combobox } from '@headlessui/react'
 import Image from 'next/image'
 import Scroll from '@/utils/Scroll'
+import { Track } from '@/utils/types'
 
-function classNames(...classes) {
+function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Example({ tracks }) {
+export default function Example({ tracks, setTracks }) {
   const [query, setQuery] = useState('')
   const [selectedsong, setSelectedsong] = useState(null)
+  // custom setSelectedsong function to modify the data too
+  const setSelectedsongAndData = (song) => {
+    setSelectedsong(song)
+    setTracks((tracks: Track[]) => tracks.map((track) => (track.title === song ? { ...track, selected: true } : track)))
+  }
 
   const filteredtracks =
     query === ''
       ? tracks
-      : tracks.filter((song) => {
+      : tracks.filter((song: { title: string }) => {
           return song.title.toLowerCase().includes(query.toLowerCase())
         })
 
   return (
-    <Combobox as='div' value={selectedsong} onChange={setSelectedsong} className=''>
+    <Combobox as='div' value={selectedsong} onChange={setSelectedsongAndData} className=''>
       <Combobox.Label className='block text-sm font-medium capitalize'>Song of the day</Combobox.Label>
       <div className='relative mt-1'>
         <Combobox.Button className='w-full'>
@@ -47,30 +53,30 @@ export default function Example({ tracks }) {
                 key={song.id}
                 value={song}
                 className={({ active }) =>
-                  classNames('relative cursor-default select-none py-2 pl-3 pr-9', active ? 'bg-indigo-600' : '')
+                  classNames('relative cursor-default select-none py-2 px-3', active ? 'bg-indigo-600' : '')
                 }>
                 {({ active, selected }) => (
                   <>
-                    <div className='flex items-center'>
-                      <Image
-                        height={24}
-                        width={24}
-                        src={song.albumCover}
-                        alt='album cover'
-                        className='flex-shrink-0 rounded-full'
-                      />
-                      <span className={classNames('ml-3 truncate', selected && 'font-semibold')}>{song.title}</span>
+                    <div className='flex items-center justify-between'>
+                      <div className='flex items-center truncate mr-1'>
+                        <Image
+                          height={24}
+                          width={24}
+                          src={song.albumCover}
+                          alt='album cover'
+                          className='flex-shrink-0 rounded-full'
+                        />
+                        <span className={classNames('ml-3 ', selected && 'font-semibold')}>{song.title}</span>
+                      </div>
+                      <div className={classNames('flex items-center gap-2', active ? 'text-white' : 'text-indigo-500')}>
+                        {song.timesPlayed > 1 && <span className=''>x{song.timesPlayed}</span>}
+                        {selected && (
+                          <span>
+                            <CheckIcon className='h-5 w-5' aria-hidden='true' />
+                          </span>
+                        )}
+                      </div>
                     </div>
-
-                    {selected && (
-                      <span
-                        className={classNames(
-                          'absolute inset-y-0 right-0 flex items-center pr-4',
-                          active ? 'text-white' : 'text-indigo-600',
-                        )}>
-                        <CheckIcon className='h-5 w-5' aria-hidden='true' />
-                      </span>
-                    )}
                   </>
                 )}
               </Combobox.Option>

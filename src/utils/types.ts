@@ -17,3 +17,12 @@ export interface SongType {
     spotify: string[];
   };
 }
+
+export interface Track {
+  id: string
+  artist: string
+  title: string
+  album: string
+  albumCover: string
+  selected: boolean
+}
