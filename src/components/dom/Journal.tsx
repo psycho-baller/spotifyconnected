@@ -1,13 +1,45 @@
-import { useEffect, useState } from 'react'
 import { HiOutlineAtSymbol, HiOutlineSave } from 'react-icons/hi'
 import { FaMusic } from 'react-icons/fa'
 import Image from 'next/image'
 import Search from './Search'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { Track } from '@/utils/types'
 
 export default function Page({ tracks, setTracks }: any) {
+  type Inputs = {
+    people: string
+    journalEntry: string
+    track: Track
+  }
+  const {
+    register,
+    handleSubmit,
+    // watch,
+    // formState: { errors },
+  } = useForm<Inputs>()
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    // get the selected track
+    const selectedTrack = tracks.find((t: Track) => t.selected)
+    // check if selectedTrack is not null
+    // if (!selectedTrack) {
+    //   return
+    // }
+    // remove the selected property from the track
+    selectedTrack && delete selectedTrack.selected && delete selectedTrack.timesPlayed
+    // add selectedfTrack to the data
+    data.track = selectedTrack
+    // send data to the server
+    fetch('/api/submit-day-journal', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+  }
   return (
     <section className='xl:mx-24 lg:mx-18 md:mx-10 sm:mx-4 mx-0.5'>
-      <form className='translucent-dashboard-box rounded-lg sm:p-10 p-4'>
+      <form className='translucent-dashboard-box rounded-lg sm:p-10 p-4' onSubmit={handleSubmit(onSubmit)}>
         <h1 className='text-3xl font-bold mb-6 capitalize text-center'>Your journal</h1>
         <div>
           <div className='flex justify-between items-center'>
@@ -39,6 +71,7 @@ export default function Page({ tracks, setTracks }: any) {
               id='comment'
               className='block px-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm bg-gray-900'
               defaultValue={''}
+              {...register('journalEntry')}
             />
           </div>
         </div>
@@ -55,15 +88,18 @@ export default function Page({ tracks, setTracks }: any) {
             <div className='mt-1'>
               <input
                 type='text'
-                name='last-name'
-                id='last-name'
-                autoComplete='family-name'
+                name='first-name'
+                id='first-name'
+                autoComplete='given-name'
                 className='search-input p-1 sm:p-1.5 block w-full !rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm bg-gray-900'
+                {...register('people')}
               />
             </div>
           </div>
         </div>
-        <button>
+        <button
+          type='submit'
+          className='mt-6 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mx-auto'>
           <span className='sr-only'>Save</span>
           <HiOutlineSave className='h-6 w-6' />
         </button>

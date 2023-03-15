@@ -1,13 +1,10 @@
-import { getSession, useSession } from 'next-auth/react'
+import { getSession, GetSessionParams, useSession } from 'next-auth/react'
 import { getRecentTracks } from '@/utils/spotify'
 import { useRouter } from 'next/router'
-import { FC, useEffect, useMemo, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import Journal from '@/components/dom/Journal'
-import { XataClient } from '@/utils/xata'
 import PreviousJournals from '@/components/dom/PreviousJournals'
 import { xata } from '@/utils/xataClient'
-import Search from '@/components/dom/Search'
-import { Track } from '@/utils/types'
 
 // https://dev.to/asimdahall/simple-search-form-in-react-using-hooks-42pg
 type Props = Awaited<ReturnType<typeof getServerSideProps>>['props']
@@ -28,13 +25,12 @@ const Page: FC<Props> = ({ data }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getRecentTracks()
-      console.log(data)
+      let data = await getRecentTracks()
       // if (!data || !data.items) {
       //   router.push('/')
       // }
 
-      let temp = data.items.map(
+      data = data.items.map(
         (item: {
           track: {
             id: string
@@ -54,12 +50,12 @@ const Page: FC<Props> = ({ data }) => {
         }),
       )
       // remove duplicates
-      temp = temp
+      data = data
         .filter((v, i, a) => a.findIndex((t) => t.id === v.id) === i)
         // sort by times played but keep  order of the rest
         .sort((a, b) => b.timesPlayed - a.timesPlayed)
 
-      setTracks(temp)
+      setTracks(data)
     }
     fetchData()
     return () => {
@@ -81,7 +77,7 @@ const Page: FC<Props> = ({ data }) => {
 //   return { props: { title: `Journal` } }
 // }
 
-export const getServerSideProps = async (context) => {
+export const getServerSideProps = async (context: GetSessionParams) => {
   const session = await getSession(context)
   const user = session?.user
   if (!user) {
@@ -103,6 +99,18 @@ export const getServerSideProps = async (context) => {
   let data = await xata.db.days.filter({ 'user.email': user.email }).getAll()
   data = JSON.parse(JSON.stringify(data))
 
+  data = await Promise.all(
+    data.map(async (day: any) => {
+      // remove the user object from the data
+      delete day.user
+      // extract the songs from the ids
+      day.song = await xata.db.songs.read(day.song)
+
+      return day
+    }),
+  )
+
+  console.log(data)
   return { props: { data } }
 }
 

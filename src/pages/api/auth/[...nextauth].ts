@@ -48,6 +48,7 @@ async function refreshAccessToken(token) {
 }
 
 export const authOptions = {
+  secret: process.env.AUTH_SECRET,
   // Configure one or more authentication providers
   providers: [
     // https://github.com/nextauthjs/next-auth/blob/main/packages/next-auth/src/core/types.ts#L324

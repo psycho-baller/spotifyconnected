@@ -2,20 +2,24 @@ import { useState } from 'react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import { Combobox } from '@headlessui/react'
 import Image from 'next/image'
-import Scroll from '@/utils/Scroll'
 import { Track } from '@/utils/types'
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Example({ tracks, setTracks }) {
+export default function Page({ tracks, setTracks }) {
   const [query, setQuery] = useState('')
-  const [selectedsong, setSelectedsong] = useState(null)
-  // custom setSelectedsong function to modify the data too
-  const setSelectedsongAndData = (song) => {
-    setSelectedsong(song)
-    setTracks((tracks: Track[]) => tracks.map((track) => (track.title === song ? { ...track, selected: true } : track)))
+  const [selectedSong, setSelectedSong] = useState(null) as [Track, any]
+  // custom setSelectedSong function to modify the data too
+  const setSelectedSongAndData = (song: Track) => {
+    setSelectedSong(song)
+    // set the selected property of the track to true
+    setTracks((tracks: Track[]) =>
+      tracks.map((track: Track) =>
+        track.title === song.title ? { ...track, selected: true } : { ...track, selected: false },
+      ),
+    )
   }
 
   const filteredtracks =
@@ -26,7 +30,7 @@ export default function Example({ tracks, setTracks }) {
         })
 
   return (
-    <Combobox as='div' value={selectedsong} onChange={setSelectedsongAndData} className=''>
+    <Combobox as='div' value={selectedSong} onChange={setSelectedSongAndData} className=''>
       <Combobox.Label className='block text-sm font-medium capitalize'>Song of the day</Combobox.Label>
       <div className='relative mt-1'>
         <Combobox.Button className='w-full'>
@@ -70,7 +74,7 @@ export default function Example({ tracks, setTracks }) {
                       </div>
                       <div className={classNames('flex items-center gap-2', active ? 'text-white' : 'text-indigo-500')}>
                         {song.timesPlayed > 1 && <span className=''>x{song.timesPlayed}</span>}
-                        {selected && (
+                        {song.selected && (
                           <span>
                             <CheckIcon className='h-5 w-5' aria-hidden='true' />
                           </span>
