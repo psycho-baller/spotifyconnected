@@ -51,8 +51,7 @@ export default function Page(props) {
               if (!session) {
                 signIn('spotify')
               } else {
-                // go to dashboard
-                router.push('/dashboard')
+                router.push('/journal')
               }
             }}>
             {session ? 'Go to journal' : 'Sign in with Spotify'}

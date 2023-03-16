@@ -33,8 +33,7 @@ export default function Page({ texture = 'med', rotate = 0, refProp = null, ...p
         if (!session) {
           signIn('spotify')
         } else {
-          // go to dashboard
-          router.push('/dashboard')
+          router.push('/journal')
         }
       }}
       onPointerEnter={() => {
